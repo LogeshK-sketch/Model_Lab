@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f2f5f9;
+        }
+
+        h1, h2 {
+            color: #234;
+        }
+
+        form, table {
+            background: white;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button, a {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #dce8f7;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Student Registration</h1>
+
+    <form action="/add" method="POST">
+        <input type="hidden" name="student_id"
+               value="{{ edit_student._id if edit_student else '' }}">
+
+        <input name="name" placeholder="Student Name"
+               value="{{ edit_student.name if edit_student else '' }}"
+               required>
+
+        <input name="age" type="number" placeholder="Age"
+               value="{{ edit_student.age if edit_student else '' }}"
+               min="1" required>
+
+        <input name="department" placeholder="Department"
+               value="{{ edit_student.department if edit_student else '' }}"
+               required>
+
+        <button type="submit">
+            {{ 'Update Student' if edit_student else 'Register Student' }}
+        </button>
+
+        {% if edit_student %}
+            <a href="/">Cancel</a>
+        {% endif %}
+    </form>
+
+    <h2>Registered Students</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.age }}</td>
+            <td>{{ student.department }}</td>
+            <td>
+                <a href="/edit/{{ student._id }}">Edit</a>
+                <a href="/delete/{{ student._id }}"
+                   onclick="return confirm('Delete this student?')">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

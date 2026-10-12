@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+</head>
+<body>
+    <h1>Student Registration</h1>
+
+    <form id="studentForm">
+        <input type="text" id="name" placeholder="Student Name" required>
+        <br><br>
+
+        <input type="text" id="regNo" placeholder="Register Number" required>
+        <br><br>
+
+        <input type="text" id="department" placeholder="Department" required>
+        <br><br>
+
+        <input type="email" id="email" placeholder="Email" required>
+        <br><br>
+
+        <button type="submit" id="saveBtn">Register Student</button>
+        <button type="button" id="cancelBtn" hidden>Cancel Edit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <h2>Registered Students</h2>
+
+    <button id="refreshBtn" type="button">Refresh List</button>
+
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Register No.</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="studentList"></tbody>
+    </table>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+
+--npm install -g firebase-tools
+--firebase login
+--firebase init hosting y existing
+public n n
+firebase deploy --only hosting

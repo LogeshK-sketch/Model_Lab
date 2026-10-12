@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dropbox File Manager</title>
+</head>
+<body>
+
+    <h1>Dropbox File Manager</h1>
+
+    <h2>Upload File</h2>
+
+    <form action="/upload" method="POST"
+          enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Files in Dropbox</h2>
+
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>File Name</th>
+            <th>Size (bytes)</th>
+            <th>Action</th>
+        </tr>
+
+        {% for file in files %}
+        <tr>
+            <td>{{ file.name }}</td>
+            <td>{{ file.size }}</td>
+            <td>    
+            <a href="{{ url_for('download', file_path=file.path_lower.lstrip('/')) }}">
+                Download
+            </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3">No files uploaded yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
